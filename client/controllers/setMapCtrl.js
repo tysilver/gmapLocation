@@ -2,6 +2,7 @@ myApp.controller('setMapCtrl', ['$scope', '$http', 'geolocationSvc', 'mapsFactor
     // $scope.geolocation = geolocationSvc.getCurrentPosition().then(console.log("We found the geolocation"))
     // console.log($scope.geolocation)
 
+
     userFactory.getCurrentUser(function(data){
         $scope.current_user = data;
     })
@@ -31,6 +32,11 @@ myApp.controller('setMapCtrl', ['$scope', '$http', 'geolocationSvc', 'mapsFactor
         }
 
         $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+        $(window).resize(function() {
+            // (the 'map' here is the result of the created 'var map = ...' above)
+            google.maps.event.trigger($scope.map, "resize");
+          });
 
         createMarker({city: "You are here!", lat: $scope.position.latitude, long: $scope.position.longitude, desc: "Drag this to your current location, then share with the world what you are doing!"})
 

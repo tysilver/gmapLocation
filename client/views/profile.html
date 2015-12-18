@@ -1,12 +1,35 @@
 <logged-in-nav></logged-in-nav>
 <div class="row needsMargin">
-  <div class="col-sm-4">
+  <!-- <div class="col-sm-4">
   	<p ng-bind="current_user.local.name"></p>
   	<a href="#/setMap">Set Location</a>
   	<a href="#/viewMap">View Locations</a>
   	
   </div>
   <div class="col-sm-8">
+  </div> -->
+  <div class="row">
+  	<div class="col-md-2 col-sm-2 col-xs-1"></div>
+  	<div class="col-md-8 col-sm-8 col-xs-10">
+  		<div id="profilePanel" class="panel panel-default needsMargin">
+		  <!-- Default panel contents -->
+		  <div class="panel-heading"><h2>Profile</h2></div>
+		  <div class="panel-body">
+		  	<div class="row">
+		  		<div id="profileButtonBox" class="col-md-6 col-sm-4 col-xs-12">
+		  			<a href="" class="btn btn-default profileButton col-md-12 col-sm-12 col-xs-12">All My Places</a>
+		  			<a href="" class="btn btn-default profileButton col-md-12 col-sm-12 col-xs-12">Favorites</a>
+		  			<a href="" class="btn btn-default profileButton col-md-12 col-sm-12 col-xs-12">My Recent Places</a>
+		  		</div>
+		  		<div class="col-md-5 col-sm-5 col-xs-12">
+		  			<div id="mapLoader"><div id="map"></div></div>
+		  		</div>
+		  		<div class="col-md-1 col-sm-3"></div>
+		  	</div>	
+		  </div>
+		</div>
+  	</div>
+  	<div class="col-md-2 col-sm-2 col-xs-1"></div>
   </div>
   
 </div>
