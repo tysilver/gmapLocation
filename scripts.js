@@ -1,10 +1,18 @@
-var myApp = angular.module('myApp', ['ngRoute']);
+var myApp = angular.module('myApp', ['ngRoute', 'myDirectives']);
 
 myApp.config(function ($routeProvider, $locationProvider) {
 	$routeProvider
 		.when('/',{
-			templateUrl: '/client/views/view1.html',
-			controller: 'userCtrl'
+			templateUrl: '/client/views/main.html',
+			controller: 'mainCtrl'
+		})
+		.when('/login',{
+			templateUrl: '/client/views/login.html',
+			controller: 'loginCtrl'
+		})
+		.when('/signup',{
+			templateUrl: '/client/views/signUp.html',
+			controller: 'signupCtrl'
 		})
 		.when('/profile',{
 			templateUrl: '/client/views/profile.html',

@@ -5,15 +5,30 @@ myApp.factory('userFactory', function ($http) {
 	var current_user = {}
 	var currentPosition = {}
 
-	factory.addUser = function(info, callback){
-		$http.post('/newUser', {info}).success(function (data){
-			current_user = data
-			console.log(data)
-			users.push(data)
-			console.log(users)
-			callback()
-		})
-	}
+	factory.addUser = function(info, callback) {
+        console.log("We went to the addUser method")
+        $http.post('/signup', {name: info.name, email: info.email, password: info.password, created_at: info.created_at}).success(function (output){
+            if (output.user) {
+                current_user = output.user;
+            }
+            console.log("And the output for the addUser post method was: ")
+            console.log(output.user.local)
+            callback(output);
+        });
+    };
+
+    factory.login = function(info, callback){
+        console.log("Here is the info we should be sending...")
+        console.log(info)
+        $http.post('/login', info).success(function (output){
+            if (output) {
+                current_user = output.user;
+                console.log("We sent the user back with: ")
+                console.log(output.user)
+            }
+            callback(output);
+        });
+    };
 
 	factory.getCurrentUser = function(callback){
 		callback(current_user)

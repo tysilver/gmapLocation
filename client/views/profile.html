@@ -1,6 +1,7 @@
-<div class="row">
+<logged-in-nav></logged-in-nav>
+<div class="row needsMargin">
   <div class="col-sm-4">
-  	<p ng-bind="current_user.name"></p>
+  	<p ng-bind="current_user.local.name"></p>
   	<a href="#/setMap">Set Location</a>
   	<a href="#/viewMap">View Locations</a>
   	
