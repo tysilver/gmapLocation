@@ -1,7 +1,7 @@
 myApp.factory('geolocationSvc', ['$q', '$window', function ($q, $window) {
 
     var factory = {}
-    current_position = ""
+    current_position = {}
 
     factory.giveCurrentPosition = function(callback) {
         getCurrentPosition(function(data){
@@ -21,9 +21,9 @@ myApp.factory('geolocationSvc', ['$q', '$window', function ($q, $window) {
             function (position) {
                 console.log("This is happening in the geolocationSvc")
                 console.log(position)
+                current_position = position
                 callback(position)
                 console.log("Finished logging geolocationSvc")
-                current_position = position
                 deferred.resolve(position);
             },
             function (err) {

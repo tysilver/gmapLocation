@@ -1,6 +1,13 @@
 myApp.controller('profileCtrl', ['$scope', '$location', 'userFactory', 'mapsFactory', 'geolocationSvc', '$http', function ($scope, $location, userFactory, mapsFactory, geolocationSvc, $http){
 	userFactory.getCurrentUser(function(data){
 		$scope.current_user = data;
+		console.log("And the current user is: ")
+		console.log($scope.current_user)
+		mapsFactory.getCurrentUserLocations($scope.current_user._id, function (data) {
+	        for (var i = 0; i < data.length; i++) {
+	            createMarker(data[i])
+	        }
+	    })
 	})
 
 	$scope.markers = [
@@ -40,12 +47,6 @@ myApp.controller('profileCtrl', ['$scope', '$location', 'userFactory', 'mapsFact
         $scope.markers.push(marker);
         
     }
-
-    mapsFactory.getAllLocations(function (data) {
-        for (var i = 0; i < data.length; i++) {
-            createMarker(data[i])
-        }
-    })
     
 
     $scope.openInfoWindow = function(e, selectedMarker){

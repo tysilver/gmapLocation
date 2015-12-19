@@ -68,19 +68,23 @@ module.exports = function(app, passport) {
 		console.log(req.body.info.name + " made it to the newUser function.")
 		users.add(req, res);
 	});
-	app.post('/setLocation', function (req, res){
-		console.log("IN the routes...")
-		console.log(req.body.info)
-		places.add(req, res);
-	});
-	app.get('/getLocations', function (req, res){
-		places.get_all(req, res);
-	});
 	app.post('/updateCurrentUser', function (req, res){
 		console.log("And the current user in routes is:")
 		console.log(req.body.current_user.name)
 		users.getCurrent(req, res);
 	});
+    app.post('/setLocation', function (req, res){
+        console.log("IN the routes...")
+        console.log(req.body.info)
+        places.add(req, res);
+    });
+    app.get('/getLocations', function (req, res){
+        places.get_all(req, res);
+    });
+    app.post('/getUserLocations', function (req, res){
+        console.log(req.body.info)
+        places.getUserLocations(req, res);
+    });
 };
 
 // route middleware to make sure a user is logged in

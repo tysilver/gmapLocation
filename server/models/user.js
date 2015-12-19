@@ -13,8 +13,7 @@ var userSchema = mongoose.Schema({
     	name         : String,
         email        : String,
         password     : String,
-        created_at   : Date,
-        places       :[{type: Schema.Types.ObjectId, ref: 'Place'}]
+        created_at   : Date
     },
     facebook         : {
         id           : String,
@@ -33,7 +32,9 @@ var userSchema = mongoose.Schema({
         token        : String,
         email        : String,
         name         : String
-    }
+    },
+    
+        places       :[{type: Schema.Types.ObjectId, ref: 'Place'}]
 
 });
 

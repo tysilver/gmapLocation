@@ -4,18 +4,6 @@ var User = mongoose.model('User');
 
 module.exports = (function(){
 	return {
-		get_all: function(req, res){
-			Place.find({}, function (err, data){
-				if (err){
-					console.log("We got an error getting all places")
-					res.json({error: err})
-				} else {
-					console.log("We got all places in places.js")
-					console.log(data)
-					res.json(data);
-				}
-			})
-		},
 		add: function (req, res){
 			var new_place = new Place({_user: req.body.info.user._id, created_at: req.body.info.created_at, status: req.body.info.status, lat: req.body.info.lat, long: req.body.info.long, dateString: req.body.info.dateString});
 			new_place.save(function (err, data){
@@ -32,6 +20,30 @@ module.exports = (function(){
 							console.log(user1)
 						}
 					})
+					res.json(data)
+				}
+			})
+		},
+		get_all: function(req, res){
+			Place.find({}, function (err, data){
+				if (err){
+					console.log("We got an error getting all places")
+					res.json({error: err})
+				} else {
+					console.log("We got all places in places.js")
+					console.log(data)
+					res.json(data);
+				}
+			})
+		},
+		getUserLocations: function(req, res){
+			console.log(req.body.info)
+			Place.find({_user: req.body.info.userId}, function (error, data){
+				if (error) {
+					console.log("We got an error getting the current user's places")
+					console.log(error)
+				} else {
+					console.log("We got all the current user's places")
 					res.json(data)
 				}
 			})
