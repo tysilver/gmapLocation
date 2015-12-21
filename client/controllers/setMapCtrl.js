@@ -53,7 +53,7 @@ myApp.controller('setMapCtrl', ['$scope', '$http', 'geolocationSvc', 'mapsFactor
         });
 
         google.maps.event.addListener(marker, 'click', function(){
-            var content = '<div style="width: 200px" class="infoWindowContent"><p>' + info.desc + '</p><form id="myForm"><input type="text" ng-model="currentStatus.text"><button ng-click="addStatus()">Submit</button></form></div>';
+            var content = '<div style="width: 200px" class="infoWindowContent"><p>' + info.desc + '</p><form id="myForm">Type: <select ng-model="currentStatus.type"><option value="leisure">Leisure</option><option value="travel">Travel</option></select> Favorite: <input type="checkbox" name="favorite" value="Favorite" ng-model="currentStatus.favorite"><input type="text" ng-model="currentStatus.text"><button ng-click="addStatus()">Submit</button></form></div>';
             var compiled = $compile(content)($scope)
             $scope.$apply()
             infoWindow.setContent(compiled[0]);
@@ -61,7 +61,7 @@ myApp.controller('setMapCtrl', ['$scope', '$http', 'geolocationSvc', 'mapsFactor
         });
 
         google.maps.event.addListener(marker, 'dragend', function(evt){
-            var content = '<div style="width: 200px" class="infoWindowContent"><p>' + info.desc + '</p><form id="myForm"><input type="text" ng-model="currentStatus.text"><button ng-click="addStatus()">Submit</button></form></div>';
+            var content = '<div style="width: 200px" class="infoWindowContent"><p>' + info.desc + '</p><form id="myForm">Type: <select ng-model="currentStatus.type"><option value="leisure">Leisure</option><option value="travel">Travel</option></select> Favorite: <input type="checkbox" name="favorite" value="Favorite" ng-model="currentStatus.favorite"><input type="text" ng-model="currentStatus.text"><button ng-click="addStatus()">Submit</button></form></div>';
             var compiled = $compile(content)($scope)
             $scope.$apply()
             infoWindow.setContent(compiled[0]);
@@ -80,7 +80,19 @@ myApp.controller('setMapCtrl', ['$scope', '$http', 'geolocationSvc', 'mapsFactor
 
     $scope.addStatus = function(){
         console.log("Got to the addStatus method")
-        var placeInfo = {user: $scope.current_user, status: $scope.currentStatus.text, created_at: new Date(), lat: $scope.position.latitude, long: $scope.position.longitude}
+        console.log("Here is the status: ")
+        console.log($scope.currentStatus)
+        if (!$scope.currentStatus.favorite) {
+            $scope.currentStatus.favorite = false;
+        }
+        if (!$scope.currentStatus.text) {
+            $scope.currentStatus.text = "No text entered."
+        }
+        if (!$scope.currentStatus.type) {
+            $scope.currentStatus.type = "none"
+        }
+        console.log($scope.currentStatus.favorite)
+        var placeInfo = {user: $scope.current_user, favorite: $scope.currentStatus.favorite, type: $scope.currentStatus.type, status: $scope.currentStatus.text, created_at: new Date(), lat: $scope.position.latitude, long: $scope.position.longitude}
         var d = new Date(placeInfo.created_at);
         placeInfo.dateString = setDate(d);
         mapsFactory.setUserLocation(placeInfo, function(){

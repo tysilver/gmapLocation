@@ -1,4 +1,4 @@
-myApp.controller('profileCtrl', ['$scope', '$location', 'userFactory', 'mapsFactory', 'geolocationSvc', '$http', function ($scope, $location, userFactory, mapsFactory, geolocationSvc, $http){
+myApp.controller('profileCtrl', ['$scope', '$location', '$routeParams', 'userFactory', 'mapsFactory', 'geolocationSvc', '$http', function ($scope, $location, $routeParams, userFactory, mapsFactory, geolocationSvc, $http){
 	userFactory.getCurrentUser(function(data){
 		$scope.current_user = data;
 		console.log("And the current user is: ")
@@ -6,6 +6,9 @@ myApp.controller('profileCtrl', ['$scope', '$location', 'userFactory', 'mapsFact
 		mapsFactory.getCurrentUserLocations($scope.current_user._id, function (data) {
 	        for (var i = 0; i < data.length; i++) {
 	            createMarker(data[i])
+	        }
+	        if (!$routeParams.myView) {
+	        	console.log("No route params so far")
 	        }
 	    })
 	})

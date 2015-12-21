@@ -5,7 +5,7 @@ var User = mongoose.model('User');
 module.exports = (function(){
 	return {
 		add: function (req, res){
-			var new_place = new Place({_user: req.body.info.user._id, created_at: req.body.info.created_at, status: req.body.info.status, lat: req.body.info.lat, long: req.body.info.long, dateString: req.body.info.dateString});
+			var new_place = new Place({_user: req.body.info.user._id, type: req.body.info.type, favorite: req.body.info.favorite, created_at: req.body.info.created_at, status: req.body.info.status, lat: req.body.info.lat, long: req.body.info.long, dateString: req.body.info.dateString});
 			new_place.save(function (err, data){
 				if(err){
 					console.log("We have errors adding the new place: " + req.body.info.status)

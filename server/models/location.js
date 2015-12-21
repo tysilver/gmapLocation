@@ -7,6 +7,8 @@ var PlaceSchema = new mongoose.Schema({
 	lat: Number,
 	long: Number,
 	dateString: String,
+	favorite: Boolean,
+	type: String,
 	_user: {type: Schema.ObjectId, ref: 'User'}
 });
 
