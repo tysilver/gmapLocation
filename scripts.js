@@ -14,7 +14,7 @@ myApp.config(function ($routeProvider, $locationProvider) {
 			templateUrl: '/client/views/signUp.html',
 			controller: 'signupCtrl'
 		})
-		.when('/profile',{
+		.when('/profile/:myView',{
 			templateUrl: '/client/views/profile.html',
 			controller: 'profileCtrl'
 		})

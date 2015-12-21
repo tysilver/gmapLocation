@@ -3,30 +3,24 @@ myApp.controller('profileCtrl', ['$scope', '$location', '$routeParams', 'userFac
 		$scope.current_user = data;
 		console.log("And the current user is: ")
 		console.log($scope.current_user)
-		mapsFactory.getCurrentUserLocations($scope.current_user._id, function (data) {
+		mapsFactory.getCurrentUserLocations($scope.current_user, $routeParams.myView, function (data, title) {
+	        $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+	        $scope.title = title;
 	        for (var i = 0; i < data.length; i++) {
-	            createMarker(data[i])
-	        }
-	        if (!$routeParams.myView) {
-	        	console.log("No route params so far")
+	            createMarker(data[i]);
 	        }
 	    })
 	})
 
 	$scope.markers = [
-        {
-           "latitude":33.22,
-           "longitude":35.33
-        }
+        
     ];
-  
+
     var mapOptions = {
         zoom: 3,
-        center: new google.maps.LatLng(40.0000, -98.0000),
+        center: new google.maps.LatLng(39.596, -97.21),
         mapTypeId: google.maps.MapTypeId.TERRAIN
     }
-
-    $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
     document.getElementById('map').style.height = "300px";
     document.getElementById('map').style.width = "300px";

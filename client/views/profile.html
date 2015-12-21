@@ -15,14 +15,15 @@
 		  <!-- Default panel contents -->
 		  <div class="panel-heading"><h2>Profile</h2></div>
 		  <div class="panel-body">
+		  	<div><h2 ng-bind="title"></h2></div>
 		  	<div class="row">
 		  		<div id="profileButtonBox" class="col-md-6 col-sm-4 col-xs-12">
 		  			<!-- WORK ON SENDING ROUTE PARAMS OR SOMETHING TO GET THE APPROPRIATE PLACES -->
-		  			<a href="" class="btn btn-warning profileButton col-md-12 col-sm-12 col-xs-12">All My Places</a>
-		  			<a href="" class="btn btn-warning profileButton col-md-12 col-sm-12 col-xs-12">Favorites</a>
-		  			<a href="" class="btn btn-warning profileButton col-md-12 col-sm-12 col-xs-12">My Recent Places</a>
-		  			<a href="" class="btn btn-warning profileButton col-md-12 col-sm-12 col-xs-12">My Leisure Activities</a>
-		  			<a href="" class="btn btn-warning profileButton col-md-12 col-sm-12 col-xs-12">Travel Destinations</a>
+		  			<a href="#/profile/all" class="btn btn-warning profileButton col-md-12 col-sm-12 col-xs-12">All My Places</a>
+		  			<a href="#/profile/favs" class="btn btn-warning profileButton col-md-12 col-sm-12 col-xs-12">Favorites</a>
+		  			<a href="#profile/recent" class="btn btn-warning profileButton col-md-12 col-sm-12 col-xs-12">My Recent Places</a>
+		  			<a href="#/profile/leisure" class="btn btn-warning profileButton col-md-12 col-sm-12 col-xs-12">My Leisure Activities</a>
+		  			<a href="#/profile/travel" class="btn btn-warning profileButton col-md-12 col-sm-12 col-xs-12">Travel Destinations</a>
 		  		</div>
 		  		<div class="col-md-5 col-sm-5 col-xs-12">
 		  			<div id="mapLoader"><div id="map"></div></div>
