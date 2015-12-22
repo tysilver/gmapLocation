@@ -5,6 +5,7 @@ myApp.factory('mapsFactory', function ($http) {
 	var current_user_places = [];
 	var count = 0;
 	var added = false;
+	var current_location = {}
 
 	factory.getAllLocations = function(callback){
 		$http.get('/getLocations').success(function(data){
@@ -15,6 +16,7 @@ myApp.factory('mapsFactory', function ($http) {
 
 	factory.getOneLocation = function(placeId, callback){
 		var myPlace = _.find(current_user_places, function(place){ return place._id == placeId; });
+		current_location = myPlace
 		callback(myPlace)
 	}
 
@@ -54,7 +56,6 @@ myApp.factory('mapsFactory', function ($http) {
 	}
 
 	factory.setUserLocation = function(info, callback){
-		console.log(info.user.local.name)
 		$http.post('/setLocation', {info}).success(function(data){
 			console.log(data)
 			places.push(data)
@@ -62,10 +63,9 @@ myApp.factory('mapsFactory', function ($http) {
 			added = true;
 			callback()
 		})
-	}
+	};
 
 	factory.updateUserLocation = function(info, callback){
-		console.log(info.user.local.name)
 		$http.post('/updateLocation', {info}).success(function(data){
 			console.log(data)
 			places = data
@@ -73,7 +73,20 @@ myApp.factory('mapsFactory', function ($http) {
 			added = true;
 			callback()
 		})
-	}
+	};
+
+	factory.deleteLocation = function(callback){
+		$http.post('/deleteLocation', {current_location}).success(function(data){
+			console.log(data)
+			withoutPlace = _.without(places, current_location);
+			places = withoutPlace
+			withoutPlace2 = _.without(current_user_places, current_location);
+			current_user_places = withoutPlace2
+			current_location = {}
+			console.log(places)
+			callback()
+		})
+	};
 
 	return factory
 })

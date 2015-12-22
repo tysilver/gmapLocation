@@ -1,4 +1,4 @@
-myApp.controller('viewPlaceCtrl', ['$scope', '$http', '$routeParams', 'geolocationSvc', 'mapsFactory', 'userFactory', function ($scope, $http, $routeParams, geolocationSvc, mapsFactory, userFactory) {
+myApp.controller('viewPlaceCtrl', ['$scope', '$http', '$routeParams', '$location', 'geolocationSvc', 'mapsFactory', 'userFactory', function ($scope, $http, $routeParams, $location, geolocationSvc, mapsFactory, userFactory) {
     userFactory.getCurrentUser(function(data){
         $scope.current_user = data;
         console.log($scope.current_user)
@@ -41,6 +41,15 @@ myApp.controller('viewPlaceCtrl', ['$scope', '$http', '$routeParams', 'geolocati
         $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
         createMarker(data)
     })
+
+    $scope.deleteLocation = function(){
+        var shouldDelete = confirm("Are you sure you want to delete this location? This action cannot be undone.");
+        if (shouldDelete == true) {
+            mapsFactory.deleteLocation(function(){
+                $location.path('/profile/all')
+            })
+        }
+    }
     
 
     $scope.openInfoWindow = function(e, selectedMarker){

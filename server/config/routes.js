@@ -87,7 +87,10 @@ module.exports = function(app, passport) {
     });
     app.post('/updateLocation', function (req, res){
         places.update_one(req, res);
-    })
+    });
+    app.post('/deleteLocation', function (req, res){
+        places.destroy(req, res)
+    });
 };
 
 // route middleware to make sure a user is logged in

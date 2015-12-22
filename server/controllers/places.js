@@ -65,5 +65,23 @@ module.exports = (function(){
 				}
 			});
 		},
+		destroy: function(req, res) {
+			Place.remove({_id: req.body.current_location._id}, function (err, data) {
+				if (err) {
+					console.log("We got an error removing the place.")
+				} else {
+					console.log("We removed a place")
+					User.update({_id: req.body.current_location._user}, {$pull: {places: req.body.current_location._id }}, function (error, data1){
+						if (error) {
+							console.log("There was an error updating the user")
+							console.log(error)
+						} else {
+							console.log("updated the user's places")
+						}
+					})
+					res.json(data)
+				}
+			});
+		}
 	}
 })();
