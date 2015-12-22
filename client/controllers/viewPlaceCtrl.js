@@ -1,4 +1,4 @@
-myApp.controller('mapCtrl', ['$scope', '$http', 'geolocationSvc', 'mapsFactory', 'userFactory', function ($scope, $http, geolocationSvc, mapsFactory, userFactory) {
+myApp.controller('viewPlaceCtrl', ['$scope', '$http', '$routeParams', 'geolocationSvc', 'mapsFactory', 'userFactory', function ($scope, $http, $routeParams, geolocationSvc, mapsFactory, userFactory) {
     userFactory.getCurrentUser(function(data){
         $scope.current_user = data;
         console.log($scope.current_user)
@@ -6,16 +6,12 @@ myApp.controller('mapCtrl', ['$scope', '$http', 'geolocationSvc', 'mapsFactory',
     $scope.markers = [];
   
     var mapOptions = {
-        zoom: 3,
-        center: new google.maps.LatLng(40.0000, -98.0000),
+        zoom: 12,
         mapTypeId: google.maps.MapTypeId.TERRAIN
     }
 
-
-    $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-    document.getElementById('map').style.height = "400px";
-    document.getElementById('map').style.width = "350px";
+    document.getElementById('map').style.height = "300px";
+    document.getElementById('map').style.width = "300px";
     
     var infoWindow = new google.maps.InfoWindow();
     
@@ -34,13 +30,16 @@ myApp.controller('mapCtrl', ['$scope', '$http', 'geolocationSvc', 'mapsFactory',
         });
         
         $scope.markers.push(marker);
+
+        google.maps.event.trigger( marker, 'click' );
         
     }  
 
-    mapsFactory.getAllLocations(function (data) {
-        for (var i = 0; i < data.length; i++) {
-            createMarker(data[i])
-        }
+    mapsFactory.getOneLocation($routeParams.placeId, function (data) {
+        $scope.currentLocation = data;
+        mapOptions.center = new google.maps.LatLng(data.lat, data.long)
+        $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        createMarker(data)
     })
     
 

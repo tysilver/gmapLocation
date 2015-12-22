@@ -26,6 +26,14 @@ myApp.config(function ($routeProvider, $locationProvider) {
 			templateUrl: '/client/views/view3.html',
 			controller: 'mapCtrl'
 		})
+		.when('/location/view/:placeId',{
+			templateUrl: '/client/views/viewPlace.html',
+			controller: 'viewPlaceCtrl'
+		})
+		.when('/location/edit/:placeId',{
+			templateUrl: '/client/views/editPlace.html',
+			controller: 'editPlaceCtrl'
+		})
 		.otherwise({
 			redirectTo: '/'
 		});

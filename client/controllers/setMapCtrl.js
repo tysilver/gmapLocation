@@ -8,13 +8,11 @@ myApp.controller('setMapCtrl', ['$scope', '$http', 'geolocationSvc', 'mapsFactor
     })
 
     var mapOptions = {};
-    $scope.markers = [
-        {
-           "latitude":37.8258152,
-           "longitude":-122.0104342
-        }
-    ];
+    $scope.markers = [];
     var infoWindow = new google.maps.InfoWindow();
+
+    document.getElementById('map').style.height = "400px";
+    document.getElementById('map').style.width = "350px";
 
     geolocationSvc.giveCurrentPosition(function(data){
         console.log("We got back here")
@@ -38,7 +36,7 @@ myApp.controller('setMapCtrl', ['$scope', '$http', 'geolocationSvc', 'mapsFactor
             google.maps.event.trigger($scope.map, "resize");
           });
 
-        createMarker({city: "You are here!", lat: $scope.position.latitude, long: $scope.position.longitude, desc: "Drag this to your current location, then share with the world what you are doing!"})
+        createMarker({title: "You are here!", lat: $scope.position.latitude, long: $scope.position.longitude, desc: "Drag this to your current location, then share with the world what you are doing!"})
 
         console.log("Over")
     })
@@ -48,7 +46,7 @@ myApp.controller('setMapCtrl', ['$scope', '$http', 'geolocationSvc', 'mapsFactor
         var marker = new google.maps.Marker({
             map: $scope.map,
             position: new google.maps.LatLng(info.lat, info.long),
-            title: info.city,
+            title: info.title,
             draggable: true
         });
 

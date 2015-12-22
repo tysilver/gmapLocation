@@ -47,6 +47,23 @@ module.exports = (function(){
 					res.json(data)
 				}
 			})
-		}
+		},
+		update_one: function(req, res){
+			Place.update({_id: req.body.info._id}, {status: req.body.info.status, updated_at: req.body.info.updated_at, lat: req.body.info.lat, long: req.body.info.long, favorite: req.body.info.favorite, type: req.body.info.type}, function(err, place) {
+				if(err) {
+					console.log("We have some errors to deal with getting the list...")
+				} else {
+					console.log(place)
+					Place.find({}, function (error, places){
+						if (error) {
+							console.log("Error finding all places")
+						} else {
+							console.log("Got all places!")
+							res.json(places);
+						}
+					})
+				}
+			});
+		},
 	}
 })();

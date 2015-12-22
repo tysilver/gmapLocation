@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
 var PlaceSchema = new mongoose.Schema({
 	status: String,
 	created_at: Date,
+	updated_at: Date,
 	lat: Number,
 	long: Number,
 	dateString: String,

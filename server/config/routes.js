@@ -85,6 +85,9 @@ module.exports = function(app, passport) {
         console.log(req.body.info)
         places.getUserLocations(req, res);
     });
+    app.post('/updateLocation', function (req, res){
+        places.update_one(req, res);
+    })
 };
 
 // route middleware to make sure a user is logged in

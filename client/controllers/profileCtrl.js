@@ -6,6 +6,7 @@ myApp.controller('profileCtrl', ['$scope', '$location', '$routeParams', 'userFac
 		mapsFactory.getCurrentUserLocations($scope.current_user, $routeParams.myView, function (data, title) {
 	        $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
 	        $scope.title = title;
+            $scope.currentLocations = data;
 	        for (var i = 0; i < data.length; i++) {
 	            createMarker(data[i]);
 	        }
@@ -43,6 +44,21 @@ myApp.controller('profileCtrl', ['$scope', '$location', '$routeParams', 'userFac
         
         $scope.markers.push(marker);
         
+    }
+
+    var toggleCount = 0;
+
+    $scope.toggleList = function(){
+        toggleCount += 1;
+        if (toggleCount % 2 == 1) {
+            document.getElementById("map").style.display = "none";
+            document.getElementById("toggleList").style.display = "block";
+            document.getElementById("profileToggle").innerHTML = "Back to Map";
+        } else {
+            document.getElementById("toggleList").style.display = "none";
+            document.getElementById("map").style.display = "block";
+            document.getElementById("profileToggle").innerHTML = "View as List";
+        }
     }
     
 

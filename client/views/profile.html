@@ -26,7 +26,8 @@
 		  			<a href="#/profile/travel" class="btn btn-warning profileButton col-md-12 col-sm-12 col-xs-12">Travel Destinations</a>
 		  		</div>
 		  		<div class="col-md-5 col-sm-5 col-xs-12">
-		  			<div id="mapLoader"><div id="map"></div></div>
+		  			<button id="profileToggle" class="btn btn-default" ng-click="toggleList()">View as List</button>
+		  			<div id="mapLoader"><div id="map"></div><div id="toggleList"><p ng-repeat="location in currentLocations | orderBy:'-created_at'"><a href="#/location/view/{{location._id}}">{{location.status}}</a> - {{location.dateString}}</p></div></div>
 		  		</div>
 		  		<div class="col-md-1 col-sm-3"></div>
 		  	</div>	
