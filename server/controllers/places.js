@@ -5,7 +5,7 @@ var User = mongoose.model('User');
 module.exports = (function(){
 	return {
 		add: function (req, res){
-			var new_place = new Place({_user: req.body.info.user._id, type: req.body.info.type, favorite: req.body.info.favorite, created_at: req.body.info.created_at, status: req.body.info.status, lat: req.body.info.lat, long: req.body.info.long, dateString: req.body.info.dateString});
+			var new_place = new Place({_user: req.body.info.user._id, visible: req.body.info.visible, type: req.body.info.type, favorite: req.body.info.favorite, created_at: req.body.info.created_at, status: req.body.info.status, lat: req.body.info.lat, long: req.body.info.long, dateString: req.body.info.dateString});
 			new_place.save(function (err, data){
 				if(err){
 					console.log("We have errors adding the new place: " + req.body.info.status)
@@ -25,7 +25,7 @@ module.exports = (function(){
 			})
 		},
 		get_all: function(req, res){
-			Place.find({}, function (err, data){
+			Place.find({visible: "everyone"}, function (err, data){
 				if (err){
 					console.log("We got an error getting all places")
 					res.json({error: err})
@@ -49,7 +49,7 @@ module.exports = (function(){
 			})
 		},
 		update_one: function(req, res){
-			Place.update({_id: req.body.info._id}, {status: req.body.info.status, updated_at: req.body.info.updated_at, lat: req.body.info.lat, long: req.body.info.long, favorite: req.body.info.favorite, type: req.body.info.type}, function(err, place) {
+			Place.update({_id: req.body.info._id}, {status: req.body.info.status, visible: req.body.info.visible, updated_at: req.body.info.updated_at, lat: req.body.info.lat, long: req.body.info.long, favorite: req.body.info.favorite, type: req.body.info.type}, function(err, place) {
 				if(err) {
 					console.log("We have some errors to deal with getting the list...")
 				} else {

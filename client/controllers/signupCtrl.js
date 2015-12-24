@@ -11,7 +11,7 @@ myApp.controller('signupCtrl', ['$scope', '$location', 'userFactory', '$http', f
                     $scope.message = (data.message);
                 } else {
                     $scope.newUser = {};
-                    $location.path('/profile/all')
+                    $location.path('/dashboard/all')
                 }
             });
         }

@@ -1,12 +1,27 @@
-#mapLoader, #setMapLoader, .mapLoader {
-    background: url('http://www.justice.gov.ma/images/loader.gif') no-repeat center;
-    margin: auto;
-    border: 1px solid black;
+#profileTitle {
+    word-wrap: break-word;
 }
 
-#mapLoader, #toggleList{
+#mapLoader, #setMapLoader, .mapLoader, #mapLoaderSet {
+    background: url('http://www.justice.gov.ma/images/loader.gif') no-repeat center;
+    margin: auto;
+}
+
+#mapLoaderSet {
+    height: 400px;
+    width: 300px;
+}
+
+#mapLoader {
+    height: 301px;
+    width: 301px;
+}
+
+#toggleList {
     height: 300px;
     width: 300px;
+    border: 1px solid black;
+    padding: 5px;
 }
 
 .mapLoader {
@@ -29,6 +44,7 @@
     display: none;
     background-color: white;
     overflow: auto;
+    word-wrap: break-word;
 }
 
 #profileToggle {
@@ -47,17 +63,30 @@
     text-align: left;
 }
 
-#profilePanel {
+#setLocationPanel {
+    margin-top: 50px;
+    border-top: 1px solid black;
+}
+
+#profilePanel, #setLocationPanel {
     padding-bottom: 50px;
 }
 
     #profileButtonBox {
-        margin-top: 50px;
+        margin-top: 43px;
     }
 
         a.profileButton {
             margin-bottom: 20px;
         }
+
+#editPlaceBox {
+
+}
+
+.blockClass {
+    text-align: left;
+}
 
 /* MEANT ONLY FOR PARALLAX MAIN PAGE */
 /* background setup */

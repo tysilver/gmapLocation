@@ -1,8 +1,7 @@
 myApp.controller('setMapCtrl', ['$scope', '$http', 'geolocationSvc', 'mapsFactory', 'userFactory', '$compile', '$location', function ($scope, $http, geolocationSvc, mapsFactory, userFactory, $compile, $location) {
     // $scope.geolocation = geolocationSvc.getCurrentPosition().then(console.log("We found the geolocation"))
     // console.log($scope.geolocation)
-
-
+    $scope.title = "My Place"
     userFactory.getCurrentUser(function(data){
         $scope.current_user = data;
     })
@@ -12,7 +11,7 @@ myApp.controller('setMapCtrl', ['$scope', '$http', 'geolocationSvc', 'mapsFactor
     var infoWindow = new google.maps.InfoWindow();
 
     document.getElementById('map').style.height = "400px";
-    document.getElementById('map').style.width = "350px";
+    document.getElementById('map').style.width = "300px";
 
     geolocationSvc.giveCurrentPosition(function(data){
         console.log("We got back here")
@@ -21,7 +20,7 @@ myApp.controller('setMapCtrl', ['$scope', '$http', 'geolocationSvc', 'mapsFactor
 
         mapOptions = {
             zoom: 3,
-            center: {lat: $scope.position.latitude, lng: $scope.position.longitude},
+            center: {lat: $scope.position.latitude + 10, lng: $scope.position.longitude},
             mapTypeId: google.maps.MapTypeId.TERRAIN,
             mapTypeControl: true,
             mapTypeControlOptions: {
@@ -51,7 +50,7 @@ myApp.controller('setMapCtrl', ['$scope', '$http', 'geolocationSvc', 'mapsFactor
         });
 
         google.maps.event.addListener(marker, 'click', function(){
-            var content = '<div style="width: 200px" class="infoWindowContent"><p>' + info.desc + '</p><form id="myForm">Type: <select ng-model="currentStatus.type"><option value="leisure">Leisure</option><option value="travel">Travel</option></select> Favorite: <input type="checkbox" name="favorite" value="Favorite" ng-model="currentStatus.favorite"><input type="text" ng-model="currentStatus.text"><button ng-click="addStatus()">Submit</button></form></div>';
+            var content = '<div style="width: 200px" class="infoWindowContent"><p>' + info.desc + '</p></div>';
             var compiled = $compile(content)($scope)
             $scope.$apply()
             infoWindow.setContent(compiled[0]);
@@ -59,7 +58,7 @@ myApp.controller('setMapCtrl', ['$scope', '$http', 'geolocationSvc', 'mapsFactor
         });
 
         google.maps.event.addListener(marker, 'dragend', function(evt){
-            var content = '<div style="width: 200px" class="infoWindowContent"><p>' + info.desc + '</p><form id="myForm">Type: <select ng-model="currentStatus.type"><option value="leisure">Leisure</option><option value="travel">Travel</option></select> Favorite: <input type="checkbox" name="favorite" value="Favorite" ng-model="currentStatus.favorite"><input type="text" ng-model="currentStatus.text"><button ng-click="addStatus()">Submit</button></form></div>';
+            var content = '<div style="width: 200px" class="infoWindowContent"><p>' + info.desc + '</p></div>';
             var compiled = $compile(content)($scope)
             $scope.$apply()
             infoWindow.setContent(compiled[0]);
@@ -89,14 +88,17 @@ myApp.controller('setMapCtrl', ['$scope', '$http', 'geolocationSvc', 'mapsFactor
         if (!$scope.currentStatus.type) {
             $scope.currentStatus.type = "none"
         }
+        if (!$scope.currentStatus.visible) {
+            $scope.currentStatus.visible = "you"
+        }
         console.log($scope.currentStatus.favorite)
-        var placeInfo = {user: $scope.current_user, favorite: $scope.currentStatus.favorite, type: $scope.currentStatus.type, status: $scope.currentStatus.text, created_at: new Date(), lat: $scope.position.latitude, long: $scope.position.longitude}
+        var placeInfo = {user: $scope.current_user, visible: $scope.currentStatus.visible, favorite: $scope.currentStatus.favorite, type: $scope.currentStatus.type, status: $scope.currentStatus.text, created_at: new Date(), lat: $scope.position.latitude, long: $scope.position.longitude}
         var d = new Date(placeInfo.created_at);
         placeInfo.dateString = setDate(d);
         mapsFactory.setUserLocation(placeInfo, function(){
             console.log("We got back some data!")
             userFactory.updateCurrentUser(function(){
-                $location.path('/viewMap')
+                $location.path('/dashboard/all')
             })
         })
     };

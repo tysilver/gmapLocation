@@ -15,7 +15,7 @@ myApp.controller('mapCtrl', ['$scope', '$http', 'geolocationSvc', 'mapsFactory',
     $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
     document.getElementById('map').style.height = "400px";
-    document.getElementById('map').style.width = "350px";
+    document.getElementById('map').style.width = "300px";
     
     var infoWindow = new google.maps.InfoWindow();
     
@@ -26,7 +26,7 @@ myApp.controller('mapCtrl', ['$scope', '$http', 'geolocationSvc', 'mapsFactory',
             position: new google.maps.LatLng(info.lat, info.long)
         });
 
-        marker.content = '<div class="infoWindowContent" style="width: 150px"><p>' + info.status + '</p><p>' + info.dateString + '</p></div>';
+        marker.content = '<div class="infoWindowContent" style="width: 150px; word-wrap: break-word"><p>' + info.status + '</p><p>' + info.dateString + '</p></div>';
         
         google.maps.event.addListener(marker, 'click', function(){
             infoWindow.setContent(marker.content);
@@ -37,7 +37,7 @@ myApp.controller('mapCtrl', ['$scope', '$http', 'geolocationSvc', 'mapsFactory',
         
     }  
 
-    mapsFactory.getAllLocations(function (data) {
+    mapsFactory.getPublicLocations(function (data) {
         for (var i = 0; i < data.length; i++) {
             createMarker(data[i])
         }

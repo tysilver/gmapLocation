@@ -46,7 +46,7 @@ myApp.controller('viewPlaceCtrl', ['$scope', '$http', '$routeParams', '$location
         var shouldDelete = confirm("Are you sure you want to delete this location? This action cannot be undone.");
         if (shouldDelete == true) {
             mapsFactory.deleteLocation(function(){
-                $location.path('/profile/all')
+                $location.path('/dashboard/all')
             })
         }
     }

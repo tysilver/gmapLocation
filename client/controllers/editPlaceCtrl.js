@@ -77,8 +77,11 @@ myApp.controller('editPlaceCtrl', ['$scope', '$http', '$routeParams', 'geolocati
         if (!$scope.currentLocation.type) {
             $scope.currentLocation.type = "none"
         }
+        if (!$scope.currentLocation.visible) {
+            $scope.currentLocation.visible = "you"
+        }
         console.log($scope.currentLocation.favorite)
-        var placeInfo = {_id: $scope.currentLocation._id, user: $scope.current_user, favorite: $scope.currentLocation.favorite, type: $scope.currentLocation.type, status: $scope.currentLocation.status, updated_at: new Date(), lat: $scope.currentLocation.lat, long: $scope.currentLocation.long}
+        var placeInfo = {_id: $scope.currentLocation._id, visible: $scope.currentLocation.visible, user: $scope.current_user, favorite: $scope.currentLocation.favorite, type: $scope.currentLocation.type, status: $scope.currentLocation.status, updated_at: new Date(), lat: $scope.currentLocation.lat, long: $scope.currentLocation.long}
         mapsFactory.updateUserLocation(placeInfo, function(){
             console.log("We got back some data!")
             mapsFactory.getCurrentUserLocations($scope.current_user, "all", function(places, title){

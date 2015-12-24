@@ -7,7 +7,7 @@ myApp.factory('mapsFactory', function ($http) {
 	var added = false;
 	var current_location = {}
 
-	factory.getAllLocations = function(callback){
+	factory.getPublicLocations = function(callback){
 		$http.get('/getLocations').success(function(data){
 			places = data
 			callback(places)
@@ -27,7 +27,7 @@ myApp.factory('mapsFactory', function ($http) {
 		//ROOM HERE TO AVOID POST ROUTE IF added = false
 		$http.post('/getUserLocations', {info}).success(function(data){
 			current_user_places = data
-			var title = "All of " + currentUser.local.name.split(" ")[0] + "'s " 
+			var title = currentUser.local.name.split(" ")[0] + "'s " 
 			if (myRoute == "all") {
 				title += "Places" 
 				callback(current_user_places, title)
@@ -56,6 +56,7 @@ myApp.factory('mapsFactory', function ($http) {
 	}
 
 	factory.setUserLocation = function(info, callback){
+		console.log(info)
 		$http.post('/setLocation', {info}).success(function(data){
 			console.log(data)
 			places.push(data)

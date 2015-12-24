@@ -12,7 +12,7 @@ myApp.controller('loginCtrl', ['$scope', '$location', 'userFactory', '$http', fu
                 } else {
                     $scope.newVisitor = {};
                     console.log(data)
-                    $location.path('/profile/all')
+                    $location.path('/dashboard/all')
                 }
             });
         }

@@ -1,12 +1,48 @@
 <logged-in-nav></logged-in-nav>
-<div class="row needsMargin container">
-	<div class="row">
-		<div class="col-sm-5"></div>
-		<div class="col-sm-2">
-			<div class="mapLoader">
-				<div id="map"></div>
-			</div>
+<div class="row needsMargin">
+  <!-- <div class="col-sm-4">
+  	<p ng-bind="current_user.local.name"></p>
+  	<a href="#/setMap">Set Location</a>
+  	<a href="#/viewMap">View Locations</a>
+  	
+  </div>
+  <div class="col-sm-8">
+  </div> -->
+  <!-- <div class="row" style="margin-top: 20px">
+  	<div class="col-lg-3 col-md-3 col-sm-3 col-xs-2"></div>
+	  	<a href="#/profile/all" class="btn btn-warning profileButton col-xs-3 col-sm-2 col-md-2 col-lg-2">Back to Profile</a>
+	  	<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+		<a href="#/viewMap" class="btn btn-success profileButton col-xs-3 col-sm-2 col-md-2 col-lg-2">All Locations</a>
+	<div class="col-lg-3 col-md-3 col-sm-3 col-xs-2"></div>
+  </div> -->
+  <div class="row">
+  	<div class="col-md-2 col-sm-2 col-xs-1"></div>
+  	<div class="col-md-8 col-sm-8 col-xs-10">
+  		<div id="setLocationPanel" class="panel panel-primary needsMargin">
+		  <!-- Default panel contents -->
+		  <div class="panel-heading"><h2>View All Locations</h2></div>
+		  <div class="panel-body">
+		  	<div class="row">
+		  		<div class="col-xs-0 col-sm-3">
+		  		</div>
+		  		<div class="col-xs-12 col-sm-6">
+		  			<a href="#/dashboard/all" class="btn btn-warning profileButton col-md-12 col-sm-12 col-xs-12">Back to Dashboard</a>
+		  			<a href="#/setMap" class="btn btn-success profileButton col-md-12 col-sm-12 col-xs-12">Set New Location</a>
+		  		</div>
+		  		<div class="col-xs-0 col-sm-3"></div>
+		  	</div>
+		  	<div class="row">
+		  		<div class="col-xs-0 col-sm-3">
+		  		</div>
+		  		<div class="col-xs-12 col-sm-6">
+		  			<div id="mapLoaderSet"><div id="map"></div></div>
+		  		</div>
+		  		<div class="col-xs-0 col-sm-3"></div>
+		  	</div>	
+		  </div>
 		</div>
-		<div class="col-sm-5"></div>
-	</div>
+  	</div>
+  	<div class="col-md-2 col-sm-2 col-xs-1"></div>
+  </div>
+  
 </div>

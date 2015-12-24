@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute', 'myDirectives']);
+var myApp = angular.module('myApp', ['ngRoute', 'myDirectives', 'ngCookies']);
 
 myApp.config(function ($routeProvider, $locationProvider) {
 	$routeProvider
@@ -14,7 +14,7 @@ myApp.config(function ($routeProvider, $locationProvider) {
 			templateUrl: '/client/views/signUp.html',
 			controller: 'signupCtrl'
 		})
-		.when('/profile/:myView',{
+		.when('/dashboard/:myView',{
 			templateUrl: '/client/views/profile.html',
 			controller: 'profileCtrl'
 		})

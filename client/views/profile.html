@@ -12,22 +12,21 @@
   	<div class="col-md-2 col-sm-2 col-xs-1"></div>
   	<div class="col-md-8 col-sm-8 col-xs-10">
   		<div id="profilePanel" class="panel panel-primary needsMargin">
-		  <!-- Default panel contents -->
-		  <div class="panel-heading"><h2>Profile</h2></div>
+		  <div class="panel-heading"><h2>Dashboard</h2></div>
 		  <div class="panel-body">
-		  	<div><h2 ng-bind="title"></h2></div>
+		  	<div><h2 id="profileTitle" ng-bind="title"></h2></div>
 		  	<div class="row">
 		  		<div id="profileButtonBox" class="col-md-6 col-sm-4 col-xs-12">
-		  			<!-- WORK ON SENDING ROUTE PARAMS OR SOMETHING TO GET THE APPROPRIATE PLACES -->
-		  			<a href="#/profile/all" class="btn btn-warning profileButton col-md-12 col-sm-12 col-xs-12">All My Places</a>
-		  			<a href="#/profile/favs" class="btn btn-warning profileButton col-md-12 col-sm-12 col-xs-12">Favorites</a>
-		  			<a href="#profile/recent" class="btn btn-warning profileButton col-md-12 col-sm-12 col-xs-12">My Recent Places</a>
-		  			<a href="#/profile/leisure" class="btn btn-warning profileButton col-md-12 col-sm-12 col-xs-12">My Leisure Activities</a>
-		  			<a href="#/profile/travel" class="btn btn-warning profileButton col-md-12 col-sm-12 col-xs-12">Travel Destinations</a>
+		  			<a href="#/setMap" class="btn btn-success profileButton col-md-12 col-sm-12 col-xs-12">Add New Place</a>
+		  			<a href="#/dashboard/all" class="btn btn-warning profileButton col-md-12 col-sm-12 col-xs-12">My Places</a>
+		  			<a href="#/dashboard/favs" class="btn btn-warning profileButton col-md-12 col-sm-12 col-xs-12">My Favorites</a>
+		  			<a href="#/dashboard/recent" class="btn btn-warning profileButton col-md-12 col-sm-12 col-xs-12">My Recent Places</a>
+		  			<a href="#/dashboard/leisure" class="btn btn-warning profileButton col-md-12 col-sm-12 col-xs-12">My Leisure Activities</a>
+		  			<a href="#/dashboard/travel" class="btn btn-warning profileButton col-md-12 col-sm-12 col-xs-12">My Travel Destinations</a>
 		  		</div>
 		  		<div class="col-md-5 col-sm-5 col-xs-12">
 		  			<button id="profileToggle" class="btn btn-default" ng-click="toggleList()">View as List</button>
-		  			<div id="mapLoader"><div id="map"></div><div id="toggleList"><p ng-repeat="location in currentLocations | orderBy:'-created_at'"><a href="#/location/view/{{location._id}}">{{location.status}}</a> - {{location.dateString}}</p></div></div>
+		  			<div id="mapLoader"><div id="map"></div><div id="toggleList"><div ng-repeat="location in currentLocations | orderBy:'-created_at'"><p><a href="#/location/view/{{location._id}}">{{location.status}}</a> - {{location.dateString}}</p><hr></div></div></div>
 		  		</div>
 		  		<div class="col-md-1 col-sm-3"></div>
 		  	</div>	
