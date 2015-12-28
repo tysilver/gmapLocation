@@ -15,8 +15,8 @@ myApp.config(function ($routeProvider, $locationProvider) {
 			controller: 'signupCtrl'
 		})
 		.when('/dashboard/:myView',{
-			templateUrl: '/client/views/profile.html',
-			controller: 'profileCtrl'
+			templateUrl: '/client/views/dashboard.html',
+			controller: 'dashboardCtrl'
 		})
 		.when('/setMap',{
 			templateUrl: '/client/views/view2.html',
@@ -34,6 +34,14 @@ myApp.config(function ($routeProvider, $locationProvider) {
 			templateUrl: '/client/views/editPlace.html',
 			controller: 'editPlaceCtrl'
 		})
+		.when('/location/edit/:placeId',{
+			templateUrl: '/client/views/editPlace.html',
+			controller: 'editPlaceCtrl'
+		})
+		// .when('/profile',{
+		// 	templateUrl: '/client/views/profile.html',
+		// 	controller: 'profileCtrl'
+		// })
 		.otherwise({
 			redirectTo: '/'
 		});

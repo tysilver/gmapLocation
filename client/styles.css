@@ -1,5 +1,6 @@
 #profileTitle {
     word-wrap: break-word;
+    margin-bottom: 25px;
 }
 
 #mapLoader, #setMapLoader, .mapLoader, #mapLoaderSet {
@@ -7,14 +8,14 @@
     margin: auto;
 }
 
-#mapLoaderSet {
-    height: 400px;
-    width: 300px;
-}
-
 #mapLoader {
     height: 301px;
     width: 301px;
+}
+
+#mapLoaderSet {
+    height: 400px;
+    width: 300px;
 }
 
 #toggleList {
@@ -73,7 +74,7 @@
 }
 
     #profileButtonBox {
-        margin-top: 43px;
+
     }
 
         a.profileButton {

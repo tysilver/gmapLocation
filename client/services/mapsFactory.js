@@ -51,6 +51,8 @@ myApp.factory('mapsFactory', function ($http) {
 					var recent = current_user_places.splice(current_user_places.length - 10)
 					callback(recent, title)
 				}
+			} else {
+				callback(false, false)
 			}
 		})
 	}
