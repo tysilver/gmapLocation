@@ -1,4 +1,4 @@
-myApp.controller('setMapCtrl', ['$scope', '$http', 'geolocationSvc', 'mapsFactory', 'userFactory', '$compile', '$location', function ($scope, $http, geolocationSvc, mapsFactory, userFactory, $compile, $location) {
+myApp.controller('setMapCtrl', ['$scope', '$http', '$window', 'geolocationSvc', 'mapsFactory', 'userFactory', '$compile', '$location', function ($scope, $http, $window, geolocationSvc, mapsFactory, userFactory, $compile, $location) {
     // $scope.geolocation = geolocationSvc.getCurrentPosition().then(console.log("We found the geolocation"))
     // console.log($scope.geolocation)
     if (!$window.isLoggedIn) {
@@ -17,8 +17,6 @@ myApp.controller('setMapCtrl', ['$scope', '$http', 'geolocationSvc', 'mapsFactor
         document.getElementById('map').style.width = "300px";
 
         geolocationSvc.giveCurrentPosition(function(data){
-            console.log("We got back here")
-            console.log(data.coords)
             $scope.position = data.coords
 
             mapOptions = {
@@ -39,8 +37,6 @@ myApp.controller('setMapCtrl', ['$scope', '$http', 'geolocationSvc', 'mapsFactor
               });
 
             createMarker({title: "You are here!", lat: $scope.position.latitude, long: $scope.position.longitude, desc: "Drag this to your current location, then share with the world what you are doing!"})
-
-            console.log("Over")
         })
         
         var createMarker = function (info){
@@ -68,20 +64,15 @@ myApp.controller('setMapCtrl', ['$scope', '$http', 'geolocationSvc', 'mapsFactor
 
                 console.log(evt.latLng.lat().toFixed(3), evt.latLng.lng().toFixed(3))
                 $scope.position = {latitude: evt.latLng.lat().toFixed(3), longitude: evt.latLng.lng().toFixed(3)}
-                console.log($scope.position);
                 infoWindow.open($scope.map, marker);
             });
             
             $scope.markers.push(marker);
-            console.log(mapOptions.center)
             google.maps.event.trigger( marker, 'click' );
             
         };
 
         $scope.addStatus = function(){
-            console.log("Got to the addStatus method")
-            console.log("Here is the status: ")
-            console.log($scope.currentStatus)
             if (!$scope.currentStatus.favorite) {
                 $scope.currentStatus.favorite = false;
             }
@@ -94,12 +85,10 @@ myApp.controller('setMapCtrl', ['$scope', '$http', 'geolocationSvc', 'mapsFactor
             if (!$scope.currentStatus.visible) {
                 $scope.currentStatus.visible = "you"
             }
-            console.log($scope.currentStatus.favorite)
             var placeInfo = {user: $scope.current_user, visible: $scope.currentStatus.visible, favorite: $scope.currentStatus.favorite, type: $scope.currentStatus.type, status: $scope.currentStatus.text, created_at: new Date(), lat: $scope.position.latitude, long: $scope.position.longitude}
             var d = new Date(placeInfo.created_at);
             placeInfo.dateString = setDate(d);
             mapsFactory.setUserLocation(placeInfo, function(){
-                console.log("We got back some data!")
                 userFactory.updateCurrentUser(function(){
                     $location.path('/dashboard/all')
                 })
@@ -110,5 +99,12 @@ myApp.controller('setMapCtrl', ['$scope', '$http', 'geolocationSvc', 'mapsFactor
             e.preventDefault();
             google.maps.event.trigger(selectedMarker, 'click');
         };
+
+        $scope.logout = function() {
+            userFactory.logout(function (data){
+                $window.isLoggedIn = false;
+                $location.path('/login')
+            })
+        }
     }
 }]);

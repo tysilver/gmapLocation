@@ -50,5 +50,14 @@ myApp.factory('userFactory', function ($http) {
 		callback(currentPosition)
 	}
 
+	factory.logout = function(callback){
+		$http.get('/logout').success(function(data){
+			users = []
+			current_user = {}
+			currentPosition = {}
+			callback()
+		})
+	}
+
 	return factory
 })

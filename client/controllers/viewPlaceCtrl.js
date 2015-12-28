@@ -1,10 +1,9 @@
-myApp.controller('viewPlaceCtrl', ['$scope', '$http', '$routeParams', '$location', 'geolocationSvc', 'mapsFactory', 'userFactory', function ($scope, $http, $routeParams, $location, geolocationSvc, mapsFactory, userFactory) {
+myApp.controller('viewPlaceCtrl', ['$scope', '$http', '$window', '$routeParams', '$location', 'geolocationSvc', 'mapsFactory', 'userFactory', function ($scope, $http, $window, $routeParams, $location, geolocationSvc, mapsFactory, userFactory) {
     if (!$window.isLoggedIn) {
         $location.path('/login')
     } else {
         userFactory.getCurrentUser(function(data){
             $scope.current_user = data;
-            console.log($scope.current_user)
         })
         $scope.markers = [];
       
@@ -58,6 +57,13 @@ myApp.controller('viewPlaceCtrl', ['$scope', '$http', '$routeParams', '$location
         $scope.openInfoWindow = function(e, selectedMarker){
             e.preventDefault();
             google.maps.event.trigger(selectedMarker, 'click');
+        }
+
+        $scope.logout = function() {
+            userFactory.logout(function (data){
+                $window.isLoggedIn = false;
+                $location.path('/login')
+            })
         }
     }
 }]);

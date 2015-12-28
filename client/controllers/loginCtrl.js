@@ -8,10 +8,8 @@ myApp.controller('loginCtrl', ['$scope', '$location', '$window', 'userFactory', 
             userFactory.login($scope.newVisitor, function (data){
                 if (data.message) {
                     $scope.message = (data.message);
-                    console.log($scope.message)
                 } else {
                     $scope.newVisitor = {};
-                    console.log(data)
                     $window.isLoggedIn = true;
                     $location.path('/dashboard/all')
                 }

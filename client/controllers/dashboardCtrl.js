@@ -4,8 +4,6 @@ myApp.controller('dashboardCtrl', ['$scope', '$location', '$window', '$routePara
     } else {
         userFactory.getCurrentUser(function(data){
     		$scope.current_user = data;
-    		console.log("And the current user is: ")
-    		console.log($scope.current_user)
     		mapsFactory.getCurrentUserLocations($scope.current_user, $routeParams.myView, function (data, title) {
                 if (title == false) {
                     $location.path('/dashboard/all')
@@ -72,6 +70,13 @@ myApp.controller('dashboardCtrl', ['$scope', '$location', '$window', '$routePara
         $scope.openInfoWindow = function(e, selectedMarker){
             e.preventDefault();
             google.maps.event.trigger(selectedMarker, 'click');
+        }
+
+        $scope.logout = function() {
+            userFactory.logout(function (data){
+                $window.isLoggedIn = false;
+                $location.path('/login')
+            })
         }
     }
 }])
