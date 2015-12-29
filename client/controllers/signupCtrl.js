@@ -1,4 +1,4 @@
-myApp.controller('signupCtrl', ['$scope', '$location', 'userFactory', '$http', function ($scope, $location, userFactory, $http){
+myApp.controller('signupCtrl', ['$scope', '$location', '$window', 'userFactory', '$http', function ($scope, $location, $window, userFactory, $http){
 	$scope.addUser = function (){
         if (!$scope.newUser.name || !$scope.newUser.email || !$scope.newUser.password) {
             $scope.message = "Name, email and password fields must be entered."
@@ -11,6 +11,7 @@ myApp.controller('signupCtrl', ['$scope', '$location', 'userFactory', '$http', f
                     $scope.message = (data.message);
                 } else {
                     $scope.newUser = {};
+                    $window.isLoggedIn = true;
                     $location.path('/dashboard/all')
                 }
             });
