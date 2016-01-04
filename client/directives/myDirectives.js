@@ -36,3 +36,10 @@ myDirectives.directive('loading',   ['$http' ,function ($http) {
     };
 
 }]);
+
+myDirectives.directive('copyrightLine', function() {
+    return {
+        restrict: 'E',
+        template: 'Copyright © 2016 Tyler Silverman'
+    }
+});
